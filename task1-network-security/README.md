@@ -136,7 +136,7 @@ In a larger, more complex network, I would implement:
 
 ## 📸 Screenshots
 
-<!--All screenshots are stored in the [`/screenshots`](./screenshots) folder.
+--All screenshots are stored in the [`/screenshots`](./screenshots) folder.
 
 | Screenshot | Description |
 |------------|-------------|
