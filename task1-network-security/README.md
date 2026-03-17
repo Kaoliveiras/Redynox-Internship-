@@ -46,17 +46,13 @@ Understand the basics of network security by learning about different types of n
 
 ### Wi-Fi Security Configuration
 
-**Steps taken on router:**
-1. Changed default administrator password
-2. Enabled WPA3 encryption (or WPA2 if WPA3 not available)
-3. Disabled WPS (Wi-Fi Protected Setup)
+**Note:** The router is managed by another person, so I don't have direct access to the configuration interface. However, based on my research and verification through connected devices:
 
-**Why?** 
-- Default passwords are easily found online
-- WPA3 provides stronger encryption than WPA2, protecting data from sniffing attacks
-- WPS has known vulnerabilities
+- ✅ **Encryption:** WPA2 is enabled (confirmed via device connection properties)
+- ✅ **Default password:** Has been changed (good security practice)
+- ❌ **WPS status:** Could not be verified due to lack of access
 
-<!--![Wi-Fi Security Settings](./screenshots/wifi-security.png)-->
+**Recommendation:** If I had access, I would disable WPS as it has known vulnerabilities.
 
 ---
 
@@ -136,7 +132,7 @@ In a larger, more complex network, I would implement:
 
 ## 📸 Screenshots
 
---All screenshots are stored in the [`/screenshots`](./screenshots) folder.
+All screenshots are stored in the [`/screenshots`](./screenshots) folder.
 
 | Screenshot | Description |
 |------------|-------------|
@@ -146,14 +142,14 @@ In a larger, more complex network, I would implement:
 | `wireshark-dns.png` | DNS queries |
 | `wireshark-icmp.png` | ICMP ping traffic |
 | `wireshark-https.png` | Encrypted TLS traffic |
-| `wireshark-suspicious.png` | Example of suspicious activity |-->
+| `wireshark-suspicious.png` | Example of suspicious activity |
 
 ---
 
 ## ✅ Task Completion Status
 
 - [x] Network threats researched
-- [] Firewall configured
-- [] Wi-Fi security configured
-- [] Wireshark traffic captured and analyzed
-- [] Documentation complete
+- [x] Firewall configured
+- [ ] Wi-Fi security configured
+- [ ] Wireshark traffic captured and analyzed
+- [ ] Documentation complete
