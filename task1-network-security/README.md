@@ -42,7 +42,7 @@ Understand the basics of network security by learning about different types of n
 
 **Why?** Telnet sends data in plain text and represents a security risk. Blocking unnecessary ports reduces the attack surface.
 
-<!--![Firewall Configuration](./screenshots/firewall-config.png)-->
+![Firewall Configuration](./screenshots/firewall-config.png)
 
 ### Wi-Fi Security Configuration
 
@@ -62,25 +62,29 @@ Understand the basics of network security by learning about different types of n
 
 #### HTTP Traffic
 Filter: `http`
-<!--![HTTP Traffic](./screenshots/wireshark-http.png)-->
+
+![HTTP Traffic](./screenshots/wireshark-http.png)
 
 HTTP traffic is unencrypted, meaning anyone on the network can see the data being transmitted.
 
 #### DNS Traffic
 Filter: `dns`
-<!--![DNS Traffic](./screenshots/wireshark-dns.png)-->
+
+![DNS Traffic](./screenshots/wireshark-dns.png)
 
 DNS queries reveal which websites are being accessed, as domain names are visible.
 
 #### ICMP Traffic (Ping)
 Filter: `icmp`
-<!--![ICMP Traffic](./screenshots/wireshark-icmp.png)-->
+
+![ICMP Traffic](./screenshots/wireshark-icmp.png)
 
 ICMP is used for network diagnostics (ping commands).
 
 #### Encrypted Traffic (HTTPS/TLS)
 Filter: `tls` or `https`
-<!--![HTTPS Traffic](./screenshots/wireshark-https.png)-->
+
+![HTTPS Traffic](./screenshots/wireshark-https.png)
 
 Note that while you can see a connection is made, the content is encrypted and unreadable.
 
@@ -92,8 +96,9 @@ Note that while you can see a connection is made, the content is encrypted and u
 - **Repeated connection attempts** to multiple ports (port scanning)
 - **DNS queries to known malicious domains**
 
-Example of suspicious activity:
-<!--![Suspicious Traffic](./screenshots/wireshark-suspicious.png)-->
+Example of suspicious activity (simulated ping flood to 8.8.8.8):
+
+![Suspicious Traffic](./screenshots/wireshark-suspicious.png)
 
 ---
 
@@ -102,7 +107,7 @@ Example of suspicious activity:
 | Measure | Protection Provided |
 |---------|---------------------|
 | **Firewall** | Blocks unauthorized inbound connections and can prevent malware from calling home |
-| **WPA3 Encryption** | Ensures wireless data is confidential and cannot be intercepted by nearby attackers |
+| **WPA2 Encryption** | Ensures wireless data is confidential and cannot be intercepted by nearby attackers |
 | **Strong Passwords** | Prevents unauthorized access to router configuration and Wi-Fi network |
 | **Traffic Monitoring** | Allows early detection of anomalous behavior that might indicate a breach |
 
@@ -136,13 +141,13 @@ All screenshots are stored in the [`/screenshots`](./screenshots) folder.
 
 | Screenshot | Description |
 |------------|-------------|
-| `firewall-config.png` | Windows Defender Firewall rules |
-| `wifi-security.png` | Router WPA3 configuration |
+| `firewall-config.png` | Windows Defender Firewall inbound rule blocking port 23 (Telnet) |
+| `wifi-security.png` | Wi-Fi encryption type (WPA2 confirmed via Windows properties) |
 | `wireshark-http.png` | HTTP traffic capture |
-| `wireshark-dns.png` | DNS queries |
-| `wireshark-icmp.png` | ICMP ping traffic |
-| `wireshark-https.png` | Encrypted TLS traffic |
-| `wireshark-suspicious.png` | Example of suspicious activity |
+| `wireshark-dns.png` | DNS queries capture |
+| `wireshark-icmp.png` | ICMP ping traffic capture |
+| `wireshark-https.png` | Encrypted TLS traffic capture |
+| `wireshark-suspicious.png` | Simulated suspicious traffic pattern (continuous ping to 8.8.8.8) |
 
 ---
 
@@ -150,6 +155,6 @@ All screenshots are stored in the [`/screenshots`](./screenshots) folder.
 
 - [x] Network threats researched
 - [x] Firewall configured
-- [ ] Wi-Fi security configured
-- [ ] Wireshark traffic captured and analyzed
-- [ ] Documentation complete
+- [x] Wi-Fi security configured
+- [x] Wireshark traffic captured and analyzed
+- [x] Documentation complete
