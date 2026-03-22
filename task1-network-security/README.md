@@ -30,7 +30,6 @@ Understand the basics of network security by learning about different types of n
 
 ### Network Environment
 - **Environment used:** Home network
-- **Router:** [Your router model]
 - **Devices:** Windows 11 laptop and smartphone
 
 ### Firewall Configuration (Windows Defender Firewall)
@@ -96,7 +95,7 @@ Note that while you can see a connection is made, the content is encrypted and u
 - **Repeated connection attempts** to multiple ports (port scanning)
 - **DNS queries to known malicious domains**
 
-Example of suspicious activity (simulated ping flood to 8.8.8.8):
+Example of suspicious activity:
 
 ![Suspicious Traffic](./screenshots/wireshark-suspicious.png)
 
@@ -137,8 +136,6 @@ In a larger, more complex network, I would implement:
 
 ## 📸 Screenshots
 
-All screenshots are stored in the [`/screenshots`](./screenshots) folder.
-
 | Screenshot | Description |
 |------------|-------------|
 | `firewall-config.png` | Windows Defender Firewall inbound rule blocking port 23 (Telnet) |
@@ -147,7 +144,7 @@ All screenshots are stored in the [`/screenshots`](./screenshots) folder.
 | `wireshark-dns.png` | DNS queries capture |
 | `wireshark-icmp.png` | ICMP ping traffic capture |
 | `wireshark-https.png` | Encrypted TLS traffic capture |
-| `wireshark-suspicious.png` | Simulated suspicious traffic pattern (continuous ping to 8.8.8.8) |
+| `wireshark-suspicious.png` | Simulated suspicious traffic pattern |
 
 ---
 
