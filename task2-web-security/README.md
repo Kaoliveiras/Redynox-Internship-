@@ -7,17 +7,27 @@ Learn about common web application vulnerabilities by analysing a simple web app
 
 ## 1. Setup
 
-### WebGoat Installation
+### Python Environment
 
-WebGoat is an intentionally vulnerable web application maintained by OWASP for learning purposes.
+**Prerequisite check:**
+
+![Python Version](./screenshots/python-version.png)
+
+### PyGoat Installation
+
+PyGoat is an intentionally vulnerable web application maintained by OWASP, written in Python using the Django framework.
 
 **Steps taken:**
-1. Downloaded the latest WebGoat JAR file from the official OWASP website
-2. Ran WebGoat using the command: `java -jar webgoat-2023.8.jar`
-3. Accessed WebGoat at `http://localhost:8080/WebGoat`
-4. Created an account to start the lessons
+1. Verified Python installation (`python --version`)
+2. Installed PyGoat using pip: `pip install pygoat`
+3. Started the application: `pygoat run`
+4. Accessed PyGoat at `http://localhost:8000`
 
-<!-- ![WebGoat Running](./screenshots/webgoat-running.png) -->
+![PyGoat Installation](./screenshots/pygoat-install.png)
+
+![PyGoat Running](./screenshots/pygoat-running.png)
+
+![PyGoat Home Page](./screenshots/pygoat-home.png)
 
 ### OWASP ZAP Setup
 
@@ -25,11 +35,11 @@ OWASP ZAP (Zed Attack Proxy) is a web application security scanner.
 
 **Steps taken:**
 1. Downloaded and installed OWASP ZAP from the official website
-2. Configured ZAP to proxy traffic through `localhost:8080`
+2. Configured ZAP to proxy traffic through `localhost:8000`
 3. Set up browser to use ZAP as a proxy
-4. Accessed WebGoat through the browser while ZAP was running
+4. Accessed PyGoat through the browser while ZAP was running
 
-<!-- ![OWASP ZAP Interface](./screenshots/owasp-zap-interface.png) -->
+![OWASP ZAP Interface](./screenshots/owasp-zap-interface.png)
 
 ---
 
@@ -39,22 +49,22 @@ OWASP ZAP (Zed Attack Proxy) is a web application security scanner.
 
 **Steps taken:**
 1. Opened OWASP ZAP
-2. Entered WebGoat URL: `http://localhost:8080/WebGoat`
+2. Entered PyGoat URL: `http://localhost:8000`
 3. Clicked "Attack" → "Active Scan"
 4. Let ZAP crawl and scan the application
 
-<!-- ![ZAP Active Scan](./screenshots/zap-active-scan.png) -->
+![ZAP Active Scan](./screenshots/zap-scan-progress.png)
 
 ### Scan Results Summary
 
 | Vulnerability | Risk Level | Location |
 |---------------|------------|----------|
 | SQL Injection | High | Login form |
-| Cross-Site Scripting (XSS) | Medium | Comment section |
-| Cross-Site Request Forgery (CSRF) | Medium | Email change form |
+| Cross-Site Scripting (XSS) | Medium | Search/comment fields |
+| Cross-Site Request Forgery (CSRF) | Medium | Form submissions |
 | Missing Security Headers | Low | HTTP response headers |
 
-<!-- ![ZAP Alerts](./screenshots/zap-alerts.png) -->
+![ZAP Alerts](./screenshots/zap-alerts.png)
 
 ---
 
@@ -74,20 +84,19 @@ OWASP ZAP (Zed Attack Proxy) is a web application security scanner.
 
 **Why it's dangerous:**
 - Attackers can bypass authentication
-- Can extract sensitive data (usernames, passwords, credit cards)
+- Can extract sensitive data (usernames, passwords)
 - Can modify or delete database records
-- In some cases, can execute commands on the database server
 
-<!-- ![SQL Injection Exploit](./screenshots/sql-injection.png) -->
+![SQL Injection Exploit](./screenshots/sql-injection.png)
 
 ### Cross-Site Scripting (XSS)
 
 **Description:** XSS allows attackers to inject malicious scripts into web pages viewed by other users.
 
-**Discovery:** ZAP detected reflected XSS in the search field.
+**Discovery:** ZAP detected reflected XSS in input fields.
 
 **Manual Exploitation:**
-1. Found a comment field or search box
+1. Found a search box or comment field
 2. Entered: `<script>alert('XSS')</script>`
 3. The script executed when the page loaded
 
@@ -95,15 +104,14 @@ OWASP ZAP (Zed Attack Proxy) is a web application security scanner.
 - Steal session cookies (session hijacking)
 - Deface websites
 - Redirect users to malicious sites
-- Capture keystrokes
 
-<!-- ![XSS Exploit](./screenshots/xss.png) -->
+![XSS Exploit](./screenshots/xss.png)
 
 ### Cross-Site Request Forgery (CSRF)
 
 **Description:** CSRF tricks authenticated users into executing unwanted actions on web applications where they're currently authenticated.
 
-**Discovery:** ZAP identified that the email change form lacked CSRF tokens.
+**Discovery:** ZAP identified that forms lacked CSRF tokens.
 
 **Manual Exploitation:**
 1. Created a malicious HTML page
@@ -114,9 +122,8 @@ OWASP ZAP (Zed Attack Proxy) is a web application security scanner.
 - Change user credentials
 - Perform unauthorized transactions
 - Modify account settings
-- Execute actions with user's privileges
 
-<!-- ![CSRF Exploit](./screenshots/csrf.png) -->
+![CSRF Exploit](./screenshots/csrf.png)
 
 ---
 
@@ -127,15 +134,48 @@ OWASP ZAP (Zed Attack Proxy) is a web application security scanner.
 | **SQL Injection** | Use parameterized queries/prepared statements, input validation, least privilege database accounts |
 | **XSS** | Output encoding, Content Security Policy (CSP), input validation, use HTTPOnly cookies |
 | **CSRF** | Implement anti-CSRF tokens, SameSite cookies, re-authentication for sensitive actions |
-| **Missing Headers** | Implement security headers: HSTS, X-Frame-Options, X-Content-Type-Options, Content-Security-Policy |
+| **Missing Headers** | Implement security headers: HSTS, X-Frame-Options, X-Content-Type-Options |
 
-### Code Examples
+---
 
-#### SQL Injection Prevention (Parameterized Query)
-```java
-// Vulnerable code
-String query = "SELECT * FROM users WHERE username = '" + username + "'";
+## 5. Reflection
 
-// Secure code with parameterized query
-PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
-stmt.setString(1, username);
+### Web Security Best Practices
+
+In a real-world production environment, additional measures would include:
+
+1. **Secure Development Lifecycle:** Security testing from the start of development
+2. **Regular Security Training:** Developers trained on secure coding practices
+3. **Web Application Firewall (WAF):** Additional layer of protection
+4. **Regular Penetration Testing:** Professional security assessments
+5. **Bug Bounty Program:** Incentivize researchers to find vulnerabilities
+
+---
+
+## 📸 Screenshots
+
+| Screenshot | Description |
+|------------|-------------|
+| `python-version.png` | Python version verification |
+| `pygoat-install.png` | PyGoat installation process |
+| `pygoat-running.png` | PyGoat server running on terminal |
+| `pygoat-home.png` | PyGoat home page in browser |
+| `owasp-zap-interface.png` | OWASP ZAP main interface |
+| `zap-scan-progress.png` | Active scan in progress |
+| `zap-alerts.png` | Alerts found by ZAP |
+| `sql-injection.png` | SQL injection demonstration |
+| `xss.png` | XSS demonstration |
+| `csrf.png` | CSRF demonstration |
+
+---
+
+## ✅ Task Completion Status
+
+- [x] Python environment verified
+- [x] PyGoat installed and configured
+- [x] OWASP ZAP installed and configured
+- [x] Active scan performed
+- [x] SQL Injection identified and exploited
+- [x] XSS identified and exploited
+- [x] CSRF identified and exploited
+- [x] Documentation complete
